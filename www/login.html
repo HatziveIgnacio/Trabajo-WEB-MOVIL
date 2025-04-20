@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* Estilos del formulario de login */
+        .login-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .login-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .login-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .login-subtitle a {
+            color: #8B0000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            text-align: left;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #8B0000;
+            outline: none;
+        }
+        
+        .form-control::placeholder {
+            color: #ccc;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-checkbox input {
+            margin-right: 10px;
+        }
+        
+        .form-checkbox label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .forgot-password {
+            font-size: 14px;
+            color: #8B0000;
+            text-decoration: none;
+            margin-left: auto;
+        }
+        
+        .login-button {
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-button:hover {
+            background-color: #6B0000;
+        }
+        
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .separator::before {
+            margin-right: 10px;
+        }
+        
+        .separator::after {
+            margin-left: 10px;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .social-button {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .social-button:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .social-icon {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Estilos para la barra de navegación (usado en las otras páginas) */
+        .navbar {
+            background-color: #8B0000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .menu a:hover {
+            opacity: 0.8;
+        }
+        
+        .menu a.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            border-radius: 20px;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Logo -->
+        <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50">
+            <path fill="#8B0000" d="M50,5 L90,20 L90,30 L50,45 L10,30 L10,20 Z"/>
+            <path fill="#CD5C5C" d="M50,5 L90,20 L50,35 L10,20 Z"/>
+            <text x="50" y="25" font-family="Arial" font-size="10" fill="white" text-anchor="middle">CINE</text>
+        </svg>
+        
+        <h1 class="login-title">Iniciar Sesión</h1>
+        <p class="login-subtitle">¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+        
+        <form>
+            <div class="form-group">
+                <label class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" placeholder="ejemplo@correo.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            
+            <div class="form-checkbox">
+                <input type="checkbox" id="remember">
+                <label for="remember">Recordarme</label>
+                <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            </div>
+            
+            <button type="button" class="login-button" onclick="location.href='index.html'">INICIAR SESIÓN</button>
+        </form>
+        
+        <div class="separator">O continúa con</div>
+        
+        <div class="social-buttons">
+            <button class="social-button">
+                <span>Google</span>
+            </button>
+            <button class="social-button">
+                <span>Facebook</span>
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Simple script to handle navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // This could include login validation, etc.
+        });
+    </script>
+</body>
+</html>
