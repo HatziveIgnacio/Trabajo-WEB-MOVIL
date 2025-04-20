@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series - Plataforma de Cine</title>
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Estilos de la barra de navegación */
+        .navbar {
+            background-color: #8B0000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            color: white;
+        }
+        
+        /* Estilos del menú */
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .menu a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Página activa */
+        .menu a.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        
+        /* Estilos de los botones */
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            border-radius: 20px;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Estilos del botón hamburguesa (menú móvil) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+        }
+
+        /* Contenido principal */
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-content h1 {
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Estilos para la lista de series */
+        .series-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .series-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .series-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .series-image {
+            height: 160px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .series-details {
+            padding: 1.2rem;
+        }
+
+        .series-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .series-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.7rem;
+        }
+
+        .series-description {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .series-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: #f1f1f1;
+            color: #555;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        /* Media query para dispositivos móviles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .menu {
+                position: absolute;
+                flex-direction: column;
+                background-color: #8B0000;
+                width: 100%;
+                top: 70px;
+                left: 0;
+                padding: 1rem 0;
+                gap: 0;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 10;
+            }
+            
+            .menu.active {
+                transform: translateY(0);
+            }
+            
+            .menu li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .menu a {
+                display: block;
+                padding: 1rem 0;
+            }
+            
+            .auth-buttons {
+                gap: 0.5rem;
+            }
+            
+            .btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .series-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <ul class="menu" id="menu">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="peliculas.html">Películas</a></li>
+            <li><a href="series.html" class="active">Series</a></li>
+            <li><a href="resenas.html">Reseñas</a></li>
+        </ul>
+        
+        <div class="auth-buttons">
+            <button class="btn" onclick="location.href='login.html'">Iniciar Sesión</button>
+            <button class="btn">Registrarse</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1>Series Populares</h1>
+        
+        <div class="series-container">
+            <!-- Serie 1 -->
+            <div class="series-card">
+                <div class="series-image">Serie 1</div>
+                <div class="series-details">
+                    <div class="series-title">Breaking Bad</div>
+                    <div class="series-info">
+                        <span>5 Temporadas</span>
+                        <span>2008-2013</span>
+                    </div>
+                    <div class="series-description">
+                        Un profesor de química con cáncer terminal se asocia con un ex alumno para fabricar y vender metanfetamina para asegurar el futuro financiero de su familia.
+                    </div>
+                    <div class="series-tags">
+                        <span class="tag">Drama</span>
+                        <span class="tag">Crimen</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Serie 2 -->
+            <div class="series-card">
+                <div class="series-image">Serie 2</div>
+                <div class="series-details">
+                    <div class="series-title">Game of Thrones</div>
+                    <div class="series-info">
+                        <span>8 Temporadas</span>
+                        <span>2011-2019</span>
+                    </div>
+                    <div class="series-description">
+                        Nueve familias nobles luchan por el control de las tierras de Poniente, mientras que un antiguo enemigo regresa después de estar dormido durante milenios.
+                    </div>
+                    <div class="series-tags">
+                        <span class="tag">Fantasía</span>
+                        <span class="tag">Aventura</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Serie 3 -->
+            <div class="series-card">
+                <div class="series-image">Serie 3</div>
+                <div class="series-details">
+                    <div class="series-title">Stranger Things</div>
+                    <div class="series-info">
+                        <span>4 Temporadas</span>
+                        <span>2016-Presente</span>
+                    </div>
+                    <div class="series-description">
+                        Cuando un niño desaparece, un pequeño pueblo descubre un misterio que involucra experimentos secretos, fuerzas sobrenaturales y una extraña niña.
+                    </div>
+                    <div class="series-tags">
+                        <span class="tag">Ciencia Ficción</span>
+                        <span class="tag">Terror</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Serie 4 -->
+            <div class="series-card">
+                <div class="series-image">Serie 4</div>
+                <div class="series-details">
+                    <div class="series-title">The Crown</div>
+                    <div class="series-info">
+                        <span>5 Temporadas</span>
+                        <span>2016-Presente</span>
+                    </div>
+                    <div class="series-description">
+                        Sigue la vida política y personal de la Reina Isabel II, desde su boda en 1947 hasta los tiempos actuales.
+                    </div>
+                    <div class="series-tags">
+                        <span class="tag">Drama</span>
+                        <span class="tag">Historia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript para el menú móvil
+        const menuToggle = document.getElementById('menuToggle');
+        const menu = document.getElementById('menu');
+        
+        menuToggle.addEventListener('click', function() {
+            menu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
