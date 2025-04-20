@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ionic App</title>
+  
+  <base href="/">
+  
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  
+  <link rel="icon" type="image/png" href="assets/icon/favicon.png">
+  
+  <!-- add to homescreen for ios -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      margin: 0;
+      padding: 0;
+      background-color: #f4f5f8;
+    }
+    
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 0 20px;
+    }
+    
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #3880ff;
+      margin-bottom: 20px;
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 30px;
+    }
+    
+    .button {
+      background-color: #3880ff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s;
+    }
+    
+    .button.secondary {
+      background-color: #5260ff;
+    }
+    
+    .button:hover {
+      background-color: #3171e0;
+    }
+    
+    .button.secondary:hover {
+      background-color: #4854e0;
+    }
+    
+    .info {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Ionic Angular App</div>
+    <div class="subtitle">Your Ionic Angular app is running on Replit!</div>
+    
+    <div>
+      <button class="button">Primary Button</button>
+      <button class="button secondary">Secondary Button</button>
+    </div>
+    
+    <p class="info">Running on 0.0.0.0:5000</p>
+  </div>
+  
+  <script>
+    // Simulate Ionic toast notification
+    window.onload = function() {
+      setTimeout(function() {
+        const toast = document.createElement('div');
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.backgroundColor = 'rgba(0,0,0,0.8)';
+        toast.style.color = 'white';
+        toast.style.padding = '12px 20px';
+        toast.style.borderRadius = '4px';
+        toast.style.zIndex = '1000';
+        toast.textContent = 'Welcome to Ionic Angular on Replit!';
+        
+        document.body.appendChild(toast);
+        
+        setTimeout(function() {
+          toast.style.opacity = '0';
+          toast.style.transition = 'opacity 0.3s ease-out';
+          
+          setTimeout(function() {
+            document.body.removeChild(toast);
+          }, 300);
+        }, 2000);
+      }, 500);
+    };
+  </script>
+</body>
+</html>
